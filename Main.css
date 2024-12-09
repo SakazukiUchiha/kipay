@@ -1,0 +1,36 @@
+/* ...existing code... */
+
+body {
+    background-color: #78f193; /* Change this to your desired color */
+}
+
+.dashboard {
+    background-color: #3ed65f;
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.about-us {
+    background-color: #e0e0e0;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.login-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+/* ...existing code... */

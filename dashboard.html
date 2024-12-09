@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Patient Dashboard</h1>
+    </header>
+    <main>
+        <div class="profile-section">
+            <h2>Personal Details</h2>
+            <p>Email: <span id="email"></span></p>
+            <p>Full Name: <span id="fullName"></span></p>
+            <p>Contact Info: <span id="contactInfo"></span></p>
+            <p>Age: <span id="age"></span></p>
+            <p>Gender: <span id="gender"></span></p>
+        </div>
+        <div class="profile-section">
+            <h2>Medical Details</h2>
+            <p>Medical Conditions: <span id="medicalConditions"></span></p>
+            <p>Medications: <span id="medications"></span></p>
+            <p>Allergies: <span id="allergies"></span></p>
+        </div>
+        <div class="profile-section">
+            <h2>Emergency Contact Details</h2>
+            <p>Emergency Contact Name: <span id="emergencyContactName"></span></p>
+            <p>Emergency Contact Phone: <span id="emergencyContactPhone"></span></p>
+        </div>
+        <p id="errorMessage" style="color: red; display: none;">Unable to fetch data. Please try again later.</p>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/getUserProfile');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                document.getElementById('email').textContent = data.email;
+                document.getElementById('fullName').textContent = data.fullName;
+                document.getElementById('contactInfo').textContent = data.contactInfo;
+                document.getElementById('medicalConditions').textContent = data.medicalConditions;
+                document.getElementById('medications').textContent = data.medications;
+                document.getElementById('allergies').textContent = data.allergies;
+                document.getElementById('emergencyContactName').textContent = data.emergencyContactName;
+                document.getElementById('emergencyContactPhone').textContent = data.emergencyContactPhone;
+                document.getElementById('age').textContent = data.age;
+                document.getElementById('gender').textContent = data.gender;
+            } catch (error) {
+                document.getElementById('errorMessage').style.display = 'block';
+                console.error('Error fetching profile:', error);
+            }
+        });
+    </script>
+</body>
+</html>

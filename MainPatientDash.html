@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="MainPatientDash.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <div class="dropdown">
+            <button class="dropbtn">Menu</button>
+            <div class="dropdown-content">
+                <a href="/UserPatient.html">My Profile</a> <!-- Updated link -->
+                <a href="/MyAppointment.html">My Appointment</a>
+                <a href="/login.html">Log out</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="doctorProfiles" class="profile-list">
+            <!-- Doctor profiles will be dynamically inserted here -->
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/getProviderProfiles');
+                const profiles = await response.json();
+                const profileList = document.getElementById('doctorProfiles');
+                profiles.forEach(profile => {
+                    const profileCard = document.createElement('div');
+                    profileCard.className = 'profile-card';
+                    profileCard.innerHTML = `
+                        <h2>${profile.fullName}</h2>
+                        <p>Job: ${profile.job}</p>
+                        <p>Specialization: ${profile.specialization}</p>
+                        <p>Years of Experience: ${profile.yearsOfExperience}</p>
+                        <button class="open-btn">View</button>
+                    `;
+                    profileCard.querySelector('.open-btn').addEventListener('click', () => {
+                        window.location.href = '/AppointmentMenu.html';
+                    });
+                    profileList.appendChild(profileCard);
+                });
+            } catch (error) {
+                console.error('Error fetching provider profiles:', error);
+            }
+        });
+    </script>
+</body>
+</html>

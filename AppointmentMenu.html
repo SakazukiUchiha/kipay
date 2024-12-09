@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="AppointmentMenu.css">
+    <title>Appointment Menu</title>
+</head>
+<body>
+    <div class="appointment-container">
+        <!-- Provider Details Section -->
+        <div class="provider-details">
+            <h2>Provider Details</h2>
+            <p><strong>Full Name:</strong> <span id="providerName">N/A</span></p>
+            <p><strong>Contact Info:</strong> <span id="providerContact">N/A</span></p>
+            <p><strong>Job:</strong> <span id="providerJob">N/A</span></p>
+            <p><strong>Specialization/s:</strong> <span id="providerSpecialization">N/A</span></p>
+            <p><strong>License Number:</strong> <span id="providerLicenseNumber">N/A</span></p>
+            <p><strong>Medical School:</strong> <span id="providerMedicalSchool">N/A</span></p>
+            <p><strong>Graduation Year:</strong> <span id="providerGraduationYear">N/A</span></p>
+            <p><strong>Year/s of Experience:</strong> <span id="providerExperienceYears">N/A</span></p>
+            <p><strong>Board Certification/s:</strong> <span id="providerBoardCertifications">N/A</span></p>
+            <p><strong>Affiliation/s:</strong> <span id="providerAffiliations">N/A</span></p>
+        </div>
+
+        <!-- Appointment Booking Section -->
+        <div class="appointment-form">
+            <h2>Book an Appointment</h2>
+            <!-- Calendar Section -->
+            <div id="calendar"></div>
+            
+            <!-- Date and Time Selection -->
+            <label for="appointmentDate">Date:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+            <label for="appointmentTime">Time:</label>
+            <input type="time" id="appointmentTime" name="appointmentTime" required>
+
+            <!-- Book Button -->
+            <button id="bookButton">Book</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const providerId = urlParams.get('providerId');
+
+            console.log('Provider ID:', providerId); // Log providerId for debugging
+
+            if (!providerId) {
+                alert('Provider ID is missing');
+                return;
+            }
+
+            // Fetch provider details
+            fetch(`/getProviderDetails?providerId=${providerId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        // Populate provider details in the HTML
+                        document.getElementById('providerName').textContent = data.fullName;
+                        document.getElementById('providerContact').textContent = data.contactInfo;
+                        document.getElementById('providerJob').textContent = data.job;
+                        document.getElementById('providerSpecialization').textContent = data.specialization;
+                        document.getElementById('providerLicenseNumber').textContent = data.licenseNumber;
+                        document.getElementById('providerMedicalSchool').textContent = data.medicalSchool;
+                        document.getElementById('providerGraduationYear').textContent = data.graduationYear;
+                        document.getElementById('providerExperienceYears').textContent = data.yearsOfExperience;
+                        document.getElementById('providerBoardCertifications').textContent = data.boardCertifications;
+                        document.getElementById('providerAffiliations').textContent = data.affiliations;
+                    } else {
+                        alert('Provider details not found');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching provider details:', error);
+                });
+
+            // Handle "Book" button click
+            document.getElementById('bookButton').addEventListener('click', () => {
+                const appointmentDate = document.getElementById('appointmentDate').value;
+                const appointmentTime = document.getElementById('appointmentTime').value;
+
+                // Send booking data to backend
+                fetch('/bookAppointment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        providerId: providerId,
+                        userId: '123', // Replace with actual user ID from session
+                        appointmentDate,
+                        appointmentTime
+                    })
+                })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message); // Show success message
+                    window.location.href = '/MainPatientDash.html'; // Redirect back to dashboard
+                })
+                .catch(error => {
+                    console.error('Error booking appointment:', error);
+                });
+            });
+        });
+
+        function viewProvider(providerId) {
+            if (!providerId) {
+                alert('Provider ID is missing');
+                return;
+            }
+
+            fetch(`/appointment-menu?providerId=${providerId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Provider details:', data);
+                })
+                .catch(error => {
+                    console.error('Error fetching provider details:', error);
+                });
+        }
+    </script>
+</body>
+</html>

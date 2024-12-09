@@ -1,0 +1,268 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #a0e9a2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column; /* Arrange items vertically */
+}
+
+.top-area {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px; /* Adjust the padding as needed */
+    text-align: center;
+    height: 120px;
+    top: 0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content horizontally */
+    position: relative; /* Add relative positioning */
+    font-family: 'Times New Roman', Times, serif; /* Change font style */
+    font-weight: bold; /* Make the text bold */
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px; /* Adjust the logo size as needed */
+    height: auto;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    background-color: white;
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px; /* Adjust the max-width as needed */
+    margin: 1em auto; /* Center the section */
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    justify-content: space-between; /* Space between left and right content */
+    align-items: center;
+    padding: 5px 20px; /* Adjust the padding to ensure text visibility */
+    position: fixed;
+    width: calc(100% - 25px); /* Adjust the width to ensure text visibility */
+    height: 40px;
+    bottom: 0;
+    font-size: 14px;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 20px; /* Adjust the left position as needed */
+    color: white; /* Ensure the text color is visible */
+    font-size: 14px; /* Adjust the font size as needed */
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 20px; /* Adjust the right position as needed */
+}
+
+.profile-text {
+    position: absolute;
+    bottom: 10px; /* Adjust the bottom position as needed */
+    right: 70px; /* Move a little bit to the side */
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+}
+
+.profile-icon {
+    width: 20px; /* Adjust the icon size as needed */
+    height: 20px;
+    margin-right: 5px;
+}
+
+.settings-button {
+    position: absolute;
+    bottom: 5px; /* Adjust the bottom position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.settings-icon {
+    width: 20px; 
+    height: 20px;
+    margin-right: 5px;
+}
+
+.content-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 140px; /* Adjust to avoid overlap with header */
+    margin-bottom: 60px; /* Adjust to avoid overlap with footer */
+    height: calc(100vh - 200px); /* Adjust height to fit between header and footer */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+}
+
+.panel {
+    background-color: #ffffff; /* White background color */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.333% - 40px); /* Three panels per row with gap */
+    box-sizing: border-box;
+    text-align: center;
+    min-width: 200px; /* Ensure minimum width for smaller screens */
+}
+
+.panel-1 {
+    background-color: #8be68e; /* Light green background */
+    text-align: left; /* Align text to the left */
+}
+
+.panel-1 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.panel-1 input[type="text"],
+.panel-1 input[type="email"],
+.panel-1 input[type="number"], /* Added number input type */
+.panel-1 select { /* Added select input type */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.panel-2 {
+    background-color: #e6e68b; /* Light yellow background */
+    text-align: left; /* Align text to the left */
+}
+
+.panel-2 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.panel-2 input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.panel-3 {
+    background-color: #e68b8b; /* Light red background */
+    text-align: left; /* Align text to the left */
+}
+
+.panel-3 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.panel-3 input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.profile-columns {
+    display: flex;
+    justify-content: center; /* Center the single column */
+    width: 80%;
+    gap: 20px; /* Add gap between columns */
+}
+
+.left-column {
+    width: 100%; /* Ensure full width for the single column */
+    margin: 10px; /* Add margin to separate columns */
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 5px; /* Adjust the bottom position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}

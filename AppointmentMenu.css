@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.appointment-container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.provider-details {
+    flex: 1;
+    margin-right: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.provider-details h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.appointment-form {
+    flex: 2;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-form h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#bookButton {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#bookButton:hover {
+    background-color: #0056b3;
+}

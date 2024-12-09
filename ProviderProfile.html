@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Appointment System - Provider Profile</title>
+    <link rel="stylesheet" href="ProviderProfile.css">
+</head>
+<body>
+    <div class="top-area">
+        <header>
+            <h1>
+                <img src="Icons/logo.png" alt="Logo" class="logo"> Healthcare Provider's Profile
+            </h1>
+            <nav>
+                <ul>
+                    <li class="nav-item">
+                        <!-- Other nav items -->
+                    </li>
+                    <!-- Removed back button -->
+                </ul>
+            </nav>
+        </header>
+    </div>
+    
+    <!-- Removed dropdown menu -->
+
+    <div class="content-area">
+        <div class="panel panel-1">
+            <h2>Personal Information</h2>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe"><br><br>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="09XXXXXXXXX"><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+        </div>
+        <div class="panel panel-2">
+            <h2>Professional Details</h2>
+            <label for="jobTitle">Job Title/Role:</label>
+            <input type="text" id="jobTitle" name="jobTitle" placeholder="Doctor, Nurse"><br><br>
+            <label for="specialization">Specialization:</label>
+            <input type="text" id="specialization" name="specialization" placeholder="Pediatrics, Cardiology"><br><br>
+            <label for="licenseNumber">Medical License Number:</label>
+            <input type="text" id="licenseNumber" name="licenseNumber" placeholder="123456"><br><br>
+            <label for="issuingAuthority">Issuing Authority:</label>
+            <input type="text" id="issuingAuthority" name="issuingAuthority" placeholder="Medical Board">
+        </div>
+        <div class="panel panel-3">
+            <h2>Education and Training</h2>
+            <label for="medicalSchool">Medical School/Institution Attended:</label>
+            <input type="text" id="medicalSchool" name="medicalSchool" placeholder="Harvard Medical School"><br><br>
+            <label for="graduationYear">Graduation Year:</label>
+            <input type="text" id="graduationYear" name="graduationYear" placeholder="2000">
+        </div>
+        <div class="panel panel-4">
+            <h2>Work Experience</h2>
+            <label for="currentEmployer">Current Employer or Practice:</label>
+            <input type="text" id="currentEmployer" name="currentEmployer" placeholder="ABC Hospital"><br><br>
+            <label for="yearsExperience">Years of Experience:</label>
+            <input type="text" id="yearsExperience" name="yearsExperience" placeholder="10 Years">
+        </div>
+        <div class="panel panel-5">
+            <h2>Certifications</h2>
+            <label for="boardCertifications">Board Certifications:</label>
+            <input type="text" id="boardCertifications" name="boardCertifications" placeholder="Board Certified in Pediatrics"><br><br>
+            <label for="specializedTraining">Relevant Specialized Training (e.g., ACLS, BLS):</label>
+            <input type="text" id="specializedTraining" name="specializedTraining" placeholder="ACLS, BLS">
+        </div>
+        <div class="panel panel-6">
+            <h2>Professional Affiliations</h2>
+            <label for="medicalOrganizations">Membership in Medical Organizations (if applicable):</label>
+            <input type="text" id="medicalOrganizations" name="medicalOrganizations" placeholder="American Medical Association">
+        </div>
+    </div>
+    
+    <form id="providerProfileForm">
+        <div class="profile-columns">
+            <div class="left-column">
+                <!-- Removed all textboxes and labels -->
+            </div>
+        </div>
+    </form>
+    
+    <footer>
+        <div class="footer-left">
+            <span id="dateTime"></span> <!-- Date and time are displayed here -->
+        </div>
+        <div class="footer-right">
+            <button id="saveButton" class="save-button">Save</button>
+        </div>
+    </footer>
+    
+    <script>
+        // Removed back button event listener
+
+        document.getElementById('saveButton').addEventListener('click', async function() {
+            const yearsExperience = document.getElementById('yearsExperience').value;
+            const numericYearsExperience = parseInt(yearsExperience, 10); // Extract numeric value
+
+            const profileData = {
+                fullName: document.getElementById('fullName').value,
+                contactInfo: document.getElementById('phoneNumber').value,
+                jobTitle: document.getElementById('jobTitle').value,
+                specialization: document.getElementById('specialization').value,
+                licenseNumber: document.getElementById('licenseNumber').value,
+                medicalSchool: document.getElementById('medicalSchool').value,
+                graduationYear: document.getElementById('graduationYear').value,
+                experienceYears: numericYearsExperience,
+                boardCertifications: document.getElementById('boardCertifications').value,
+                affiliations: document.getElementById('medicalOrganizations').value,
+            };
+
+            try {
+                const response = await fetch('/saveProviderProfile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(profileData),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Profile saved successfully');
+                    window.location.href = 'MainProviderDash.html'; // Redirect to MainProviderDash.html
+                } else {
+                    alert('Error saving profile: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while saving the profile');
+            }
+        });
+
+        function updateDateTime() {
+            var now = new Date();
+            var dateTimeString = now.toLocaleString();
+            document.getElementById('dateTime').textContent = dateTimeString;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Fetch email from URL and populate the email input field
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+            if (email) {
+                document.getElementById('email').value = email;
+            }
+        };
+    </script>
+</body>
+</html>
